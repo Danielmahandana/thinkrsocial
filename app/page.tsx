@@ -120,13 +120,6 @@ export default function Home() {
       </div>
 
       {
-        dashboardType === 'algorithms' && (
-          <div className='md:flex min-h-[300px] mt-3 px-6'>
-            <p>Choose your algorithm coming soon...</p>
-        </div>
-        )
-      }
-      {
         dashboardType === 'dashboard' && (      <div className='md:flex min-h-[300px] mt-3'>
         <div className="border border rounded-tl rounded-bl md:w-[230px] pt-3 px-2 pb-8 flex-col flex">
           <p className='font-medium ml-4 mb-2 mt-1'>Social Views</p>
@@ -184,11 +177,10 @@ export default function Home() {
                       href={`https://share.lens.xyz/u/${profile.handle.namespace}/${profile.handle.localName}`}>
                       <div className="space-y-3">
                           <div className="overflow-hidden rounded-md">
-                          <Image
-                          className="h-auto w-auto object-cover transition-all hover:scale-105 aspect-square"
-                          src={profile.metadata?.picture?.optimized?.uri}
-                          alt="" // Add an alt text for accessibility
-                          />
+                            <img
+                              className="h-auto w-auto object-cover transition-all hover:scale-105 aspect-square"
+                              src={profile.metadata?.picture?.optimized?.uri
+                            } />
                           </div>
                           <div className="space-y-1 text-sm">
                             <h3 className="font-medium leading-none">{profile.handle.localName}.{profile.handle.namespace}</h3>
@@ -236,13 +228,12 @@ export default function Home() {
                           </div>
                         </div>
                         <div>
-                        <Image
+                          <img
                             className={cn(`
-                              max-w-full sm:max-w-[500px]
-                              rounded-2xl h-auto object-cover transition-all hover:scale-105
-                          `)}
-                            src={publication.__typename === 'Post' ? publication.metadata?.asset?.image?.optimized?.uri : ''}
-                            alt="" // Add an alt text for accessibility
+                            max-w-full sm:max-w-[500px]
+                            rounded-2xl h-auto object-cover transition-all hover:scale-105
+                            `)}
+                            src={publication.__typename === 'Post' ? publication.metadata?.asset?.image?.optimized.uri : ''}
                           />
                           <ReactMarkdown className="
                           mt-4 break-words
@@ -306,15 +297,15 @@ export default function Home() {
                           </div>
                         </div>
                         <div>
-                        <Image
-                          className={cn(`
-                          max-w-full sm:max-w-[500px] mb-3
-                          rounded-2xl h-auto object-cover transition-all hover:scale-105
-                          `)}
-                          src={publication.__typename === 'Post' ?
-                          publication.metadata?.asset?.cover?.optimized?.uri :
-                          publication.metadata?.asset?.cover?.optimized?.raw?.uri}
-                          alt="" // Add an alt text for accessibility
+                          <img
+                             className={cn(`
+                             max-w-full sm:max-w-[500px] mb-3
+                             rounded-2xl h-auto object-cover transition-all hover:scale-105
+                             `)}
+                            src={publication.__typename === 'Post' ?
+                            publication.metadata?.asset?.cover?.optimized?.uri ?
+                            publication.metadata?.asset?.cover?.optimized?.uri :
+                            publication.metadata?.asset?.cover?.optimized?.raw?.uri : ''}
                           />
                           <audio controls>
                             <source
